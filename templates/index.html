@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>⚡ DRIFT SCAN • DG DRIFT</title>
+    <title>⚡ BAN PANEL BY GOD ⚡</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * {
@@ -22,7 +22,6 @@
             letter-spacing: 1px;
         }
 
-        /* animated grid background */
         body::before {
             content: "";
             position: fixed;
@@ -31,8 +30,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(#0ff1 1px, transparent 1px),
-                linear-gradient(90deg, #0ff1 1px, transparent 1px);
+                linear-gradient(#ff0040 1px, transparent 1px),
+                linear-gradient(90deg, #ff0040 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 0;
@@ -52,31 +51,47 @@
             z-index: 2;
         }
 
-        /* glass card with neon border */
         .cyber-card {
             background: rgba(6, 12, 24, 0.65);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(255, 0, 64, 0.6);
             border-radius: 32px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.05);
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.3), inset 0 0 20px rgba(255, 0, 64, 0.05);
             padding: 1.8rem;
             transition: all 0.3s ease;
         }
 
         h1 {
-            font-weight: 800;
-            font-size: 2.6rem;
-            background: linear-gradient(135deg, #ff66ff, #00ffff);
+            font-weight: 900;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ff0040, #ff6600, #ff0040);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 15px #0ff5;
-            letter-spacing: 3px;
+            text-shadow: 0 0 30px #ff0040, 0 0 60px #ff0040;
+            letter-spacing: 4px;
             font-variant: small-caps;
+            animation: pulseGlow 2s infinite;
         }
 
-        .glow-text {
-            text-shadow: 0 0 8px cyan;
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040; }
+            50% { text-shadow: 0 0 40px #ff0040, 0 0 80px #ff6600, 0 0 120px #ff0040; }
+            100% { text-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040; }
+        }
+
+        .subtitle {
+            margin-top: 8px;
+            letter-spacing: 2px;
+            font-variant: small-caps;
+            color: #ff0040;
+            animation: pulseText 1.5s infinite;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
         }
 
         .input-group {
@@ -92,13 +107,13 @@
             flex: 2;
             min-width: 240px;
             background: #010a14dd;
-            border: 1.5px solid #0cf;
+            border: 1.5px solid #ff0040;
             border-radius: 60px;
             padding: 14px 26px;
             font-family: 'Share Tech Mono', monospace;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #0ff;
+            color: #ff0040;
             outline: none;
             backdrop-filter: blur(4px);
             transition: 0.2s;
@@ -107,42 +122,41 @@
         }
 
         .cyber-input:focus {
-            border-color: #ff44ee;
-            box-shadow: 0 0 20px #ff44ee, inset 0 0 6px #ff44ee;
+            border-color: #ff6600;
+            box-shadow: 0 0 20px #ff0040, inset 0 0 6px #ff0040;
         }
 
         .cyber-btn {
-            background: linear-gradient(115deg, #0a1f2e, #001a30);
-            border: 1px solid #0ff;
+            background: linear-gradient(115deg, #2a0a1a, #1a0a0a);
+            border: 1px solid #ff0040;
             padding: 12px 36px;
             border-radius: 60px;
             font-family: 'Orbitron', monospace;
             font-weight: bold;
             font-size: 1rem;
-            color: #0ff;
+            color: #ff0040;
             cursor: pointer;
             transition: 0.2s;
             backdrop-filter: blur(4px);
-            box-shadow: 0 0 12px #0ff4;
+            box-shadow: 0 0 12px #ff00404;
             font-variant: small-caps;
         }
 
         .cyber-btn:hover {
-            background: #0ff2;
-            border-color: #ff44ee;
+            background: #ff00402;
+            border-color: #ff6600;
             color: #fff;
-            box-shadow: 0 0 28px #ff44ee;
+            box-shadow: 0 0 28px #ff0040;
             transform: scale(1.03);
         }
 
-        /* loading zone - neon progress */
         .loading-zone {
-            background: #07121fcc;
+            background: #0a0a1fcc;
             border-radius: 32px;
             padding: 1.5rem;
             margin: 30px 0;
-            border-left: 8px solid #0ff;
-            border-right: 2px solid #f0f;
+            border-left: 8px solid #ff0040;
+            border-right: 2px solid #ff6600;
             backdrop-filter: blur(8px);
         }
 
@@ -152,10 +166,11 @@
             letter-spacing: 2px;
             font-variant: small-caps;
             font-weight: bold;
+            color: #ff0040;
         }
 
         .progress-bar-bg {
-            background: #11212e;
+            background: #1a0a0a;
             border-radius: 40px;
             height: 16px;
             margin: 16px 0;
@@ -166,10 +181,10 @@
         .progress-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #0cf, #f0f);
+            background: linear-gradient(90deg, #ff0040, #ff6600);
             border-radius: 40px;
             transition: width 0.25s ease;
-            box-shadow: 0 0 10px cyan;
+            box-shadow: 0 0 10px #ff0040;
         }
 
         .result-container {
@@ -192,7 +207,7 @@
 
         .data-block {
             background: rgba(3, 11, 23, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 0, 64, 0.3);
             border-radius: 28px;
             padding: 1.4rem;
             backdrop-filter: blur(4px);
@@ -201,18 +216,18 @@
 
         .data-block:hover {
             transform: translateY(-4px);
-            box-shadow: 0 0 22px cyan;
-            border-color: cyan;
+            box-shadow: 0 0 22px #ff0040;
+            border-color: #ff0040;
         }
 
         .block-title {
             font-weight: 800;
             font-size: 1.4rem;
-            border-bottom: 2px solid #0ff;
+            border-bottom: 2px solid #ff0040;
             display: inline-block;
             margin-bottom: 1.2rem;
             text-transform: uppercase;
-            background: linear-gradient(145deg, #aaffff, #0cf);
+            background: linear-gradient(145deg, #ff6666, #ff0040);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -224,7 +239,7 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            border-bottom: 1px dashed #2c6e8f;
+            border-bottom: 1px dashed #6e2c3f;
             padding: 10px 0;
             font-family: 'Share Tech Mono', monospace;
             font-size: 0.88rem;
@@ -233,13 +248,13 @@
 
         .info-label {
             font-weight: 700;
-            color: #9bdff5;
+            color: #ff6b8a;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .info-value {
-            color: #ffe6b3;
+            color: #ffb3b3;
             word-break: break-word;
             text-align: right;
             max-width: 60%;
@@ -252,7 +267,7 @@
             padding: 3px 8px;
             border-radius: 20px;
             font-size: 0.8rem;
-            color: #0ff;
+            color: #ff0040;
             font-family: monospace;
         }
 
@@ -265,44 +280,44 @@
         }
 
         .media-card {
-            background: #07121fe0;
+            background: #0a071fe0;
             border-radius: 32px;
             padding: 18px;
             text-align: center;
-            border: 1px solid #ff44ee;
-            box-shadow: 0 0 18px #ff44ee40;
+            border: 1px solid #ff0040;
+            box-shadow: 0 0 18px #ff004040;
             max-width: 340px;
             transition: 0.2s;
         }
 
         .media-card:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 28px #ff44ee;
+            box-shadow: 0 0 28px #ff0040;
         }
 
         .media-card img {
             max-width: 100%;
             border-radius: 20px;
-            box-shadow: 0 0 18px cyan;
+            box-shadow: 0 0 18px #ff0040;
         }
 
         .error-message {
             background: #2a0a1fdd;
-            border-left: 8px solid #ff3366;
+            border-left: 8px solid #ff0040;
             padding: 24px;
             border-radius: 28px;
             margin: 20px 0;
             font-family: monospace;
             font-weight: bold;
             backdrop-filter: blur(4px);
+            color: #ff0040;
         }
 
-        /* developer links - stylish */
         .dev-links {
             margin-top: 2rem;
             text-align: center;
             font-size: 0.9rem;
-            border-top: 1px solid #0ff;
+            border-top: 1px solid #ff0040;
             padding-top: 1.5rem;
             display: flex;
             flex-wrap: wrap;
@@ -311,25 +326,25 @@
         }
 
         .dev-links a {
-            color: #0ff;
+            color: #ff0040;
             text-decoration: none;
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 255, 0.08);
+            background: rgba(255, 0, 64, 0.08);
             padding: 8px 20px;
             border-radius: 48px;
-            border: 1px solid #0ff;
+            border: 1px solid #ff0040;
             font-variant: small-caps;
             font-weight: bold;
             backdrop-filter: blur(4px);
         }
 
         .dev-links a:hover {
-            background: #0ff3;
+            background: #ff00403;
             color: white;
-            box-shadow: 0 0 18px cyan;
+            box-shadow: 0 0 18px #ff0040;
             transform: translateY(-2px);
         }
 
@@ -339,48 +354,87 @@
             font-size: 0.7rem;
             opacity: 0.7;
             font-variant: small-caps;
+            color: #ff0040;
+        }
+
+        .ban-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .ban-status.banned {
+            background: #ff0040;
+            color: #fff;
+            animation: blinkBan 1s infinite;
+        }
+
+        .ban-status.clean {
+            background: #00ff40;
+            color: #000;
+        }
+
+        .ban-status.unknown {
+            background: #ffaa00;
+            color: #000;
+        }
+
+        @keyframes blinkBan {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
         @media (max-width: 760px) {
             body { padding: 1rem; }
             .info-value { max-width: 55%; font-size: 0.7rem; }
             .block-title { font-size: 1.1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+
+        .rate-limit-info {
+            font-size: 0.7rem;
+            color: #ff6b8a;
+            margin-top: 10px;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="cyber-card" style="text-align: center;">
-        <h1>◢ DRIFT SCAN · DG DRIFT ◣</h1>
-        <p style="margin-top: 8px; letter-spacing: 2px; font-variant: small-caps;">⚡ ULTRA VISUAL PLAYER ANALYZER ⚡</p>
+        <h1>◢ BAN PANEL · BY GOD ◣</h1>
+        <p class="subtitle">⚡ ULTIMATE FREE FIRE BAN CHECKER ⚡</p>
         <div class="input-group">
-            <input type="text" id="uidInput" class="cyber-input" placeholder="➤ enter uid ..." autocomplete="off">
+            <input type="text" id="uidInput" class="cyber-input" placeholder="➤ enter uid to scan ..." autocomplete="off">
             <button id="scanBtn" class="cyber-btn">⟁ scan player</button>
         </div>
+        <div class="rate-limit-info" id="rateLimitInfo">🔒 Free tier: 5 checks per day</div>
     </div>
 
     <div id="loadingArea" style="display: none;">
         <div class="loading-zone">
-            <div class="progress-stage" id="stageMessage">🔄 connecting...</div>
+            <div class="progress-stage" id="stageMessage">🔄 establishing connection...</div>
             <div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div>
-            <div id="stageDetail" style="font-size: 0.75rem; color: #0cf9; font-variant: small-caps;">[▓░░░░░░░░░] 10%</div>
+            <div id="stageDetail" style="font-size: 0.75rem; color: #ff0040; font-variant: small-caps;">[▓░░░░░░░░░] 10%</div>
         </div>
     </div>
 
     <div id="resultContainer" class="result-container"></div>
 
-    <!-- fixed footer links -->
     <div class="dev-links">
-        <span>⚡ developer:</span>
+        <span style="color: #ff0040;">⚡ developer:</span>
         <a href="https://t.me/DGDRIFT" target="_blank">𝐃𝐑𝐈𝐅𝐓 🕷️</a>
         <a href="https://t.me/DGDRIFT" target="_blank">📱 tg: @dgdrift</a>
         <a href="https://t.me/DGDRIFT" target="_blank">📢 channel: @dgdrift</a>
     </div>
-    <footer>⚡ dg drift • next‑gen cyber scan ⚡</footer>
+    <footer>⚡ BAN PANEL BY GOD • POWERED BY DG DRIFT ⚡</footer>
 </div>
 
 <script>
-    // ---------- loading steps (same original animation, small caps text) ----------
     let stepInterval = null;
     let currentStep = 0;
     const steps = [
@@ -419,7 +473,7 @@
         const stageMsgDiv = document.getElementById('stageMessage');
         const stageDetailDiv = document.getElementById('stageDetail');
         const progressFill = document.getElementById('progressFill');
-        if (stageMsgDiv) stageMsgDiv.innerText = "✅ success! uid scanned";
+        if (stageMsgDiv) stageMsgDiv.innerText = "✅ success! player scanned";
         if (stageDetailDiv) stageDetailDiv.innerText = "[▓▓▓▓▓▓▓▓▓▓] 100%";
         if (progressFill) progressFill.style.width = "100%";
     }
@@ -450,7 +504,43 @@
         } catch(e) { return value; }
     }
 
-    function renderPlayerData(data, bannerBase64, outfitBase64) {
+    function getBanStatusDisplay(banInfo) {
+        if (!banInfo) {
+            return { status: 'unknown', label: '❓ UNKNOWN', reason: 'Unable to check ban status' };
+        }
+        
+        if (banInfo.is_banned === true || banInfo.is_banned === 1) {
+            let periodText = '';
+            if (banInfo.ban_period === 6) periodText = '6 Years';
+            else if (banInfo.ban_period === 30) periodText = '30 Days';
+            else if (banInfo.ban_period === 7) periodText = '7 Days';
+            else if (banInfo.ban_period === 1) periodText = '1 Day';
+            else periodText = 'Permanent';
+            
+            return {
+                status: 'banned',
+                label: `⚠️ BANNED (${periodText})`,
+                reason: banInfo.message || 'Violation of terms of service',
+                period: periodText
+            };
+        } else if (banInfo.is_banned === false || banInfo.is_banned === 0) {
+            return {
+                status: 'clean',
+                label: '✅ CLEAN',
+                reason: 'No violations found',
+                period: 'N/A'
+            };
+        } else {
+            return {
+                status: 'unknown',
+                label: '❓ UNKNOWN',
+                reason: 'Unable to check ban status',
+                period: 'N/A'
+            };
+        }
+    }
+
+    function renderPlayerData(data, bannerBase64, outfitBase64, banInfo) {
         const p = data.basicInfo || {};
         const pr = data.profileInfo || {};
         const g = data.clanBasicInfo || {};
@@ -469,6 +559,9 @@
 
         const bannerImg = bannerBase64 ? `data:image/png;base64,${bannerBase64}` : null;
         const outfitImg = outfitBase64 ? `data:image/png;base64,${outfitBase64}` : null;
+
+        const banDisplay = getBanStatusDisplay(banInfo);
+        const isBanned = banDisplay.status === 'banned';
 
         return `
             <div class="media-row">
@@ -540,9 +633,33 @@
                     <div class="info-row"><span class="info-label">summary end</span><span class="info-value"><code>${ts(c.periodicSummaryEndTime)}</code></span></div>
                     <div class="info-row"><span class="info-label">💎 diamond cost</span><span class="info-value"><code>${d.diamondCost ?? 'None'}</code></span></div>
                 </div>
+                <div class="data-block" style="border: 2px solid #ff0040;">
+                    <div class="block-title" style="border-bottom-color: #ff0040;">🚫 BAN STATUS</div>
+                    <div class="info-row">
+                        <span class="info-label">status</span>
+                        <span class="info-value"><span class="ban-status ${banDisplay.status}">${banDisplay.label}</span></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">reason</span>
+                        <span class="info-value"><code>${banDisplay.reason}</code></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">ban period</span>
+                        <span class="info-value"><code>${banDisplay.period}</code></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">checked via</span>
+                        <span class="info-value"><code>Garena Official API</code></span>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px; padding: 10px; background: ${isBanned ? 'rgba(255,0,64,0.1)' : 'rgba(0,255,64,0.1)'}; border-radius: 12px;">
+                        <p style="font-size: 0.8rem; color: ${isBanned ? '#ff0040' : '#00ff40'};">
+                            ${isBanned ? '⚠️ This player is BANNED from Free Fire' : '✅ This player is CLEAN'}
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="dev-links" style="margin-top: 2rem;">
-                <span>⚡ developer:</span>
+                <span style="color: #ff0040;">⚡ developer:</span>
                 <a href="https://t.me/DGDRIFT" target="_blank">𝐃𝐑𝐈𝐅𝐓 🕷️</a>
                 <a href="https://t.me/DGDRIFT" target="_blank">📱 tg: @dgdrift</a>
                 <a href="https://t.me/DGDRIFT" target="_blank">📢 channel: @dgdrift</a>
@@ -550,9 +667,34 @@
         `;
     }
 
+    // Check rate limit info
+    async function checkRateLimit() {
+        try {
+            const response = await fetch('/api/status');
+            if (response.ok) {
+                const data = await response.json();
+                const remaining = data.rate_limit?.remaining || 0;
+                const max = data.rate_limit?.max_requests || 5;
+                document.getElementById('rateLimitInfo').textContent = 
+                    `🔒 ${remaining} of ${max} checks remaining today`;
+            }
+        } catch (e) {
+            console.error('Rate limit check error:', e);
+        }
+    }
+
     document.getElementById('scanBtn').addEventListener('click', async () => {
         const uid = document.getElementById('uidInput').value.trim();
-        if (!uid) return alert("⚠️ enter valid uid");
+        if (!uid) {
+            alert("⚠️ enter valid uid");
+            return;
+        }
+
+        // Validate UID is numeric
+        if (!/^\d+$/.test(uid)) {
+            alert("⚠️ Invalid UID format. Must be numeric.");
+            return;
+        }
 
         resetUI();
         document.getElementById('loadingArea').style.display = 'block';
@@ -560,25 +702,41 @@
 
         try {
             const response = await fetch(`/api/player?uid=${encodeURIComponent(uid)}`);
-            if (!response.ok) {
-                const err = await response.json();
-                throw new Error(err.error || "player not found");
+            
+            if (response.status === 429) {
+                const errorData = await response.json();
+                throw new Error(`Rate limit exceeded: ${errorData.error}`);
             }
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Server error: ${response.status}`);
+            }
+            
             const data = await response.json();
             stopLoadingAndSetComplete();
             await new Promise(r => setTimeout(r, 400));
 
-            const html = renderPlayerData(data.info, data.banner_base64, data.outfit_base64);
+            const html = renderPlayerData(
+                data.info, 
+                data.banner_base64, 
+                data.outfit_base64,
+                data.ban_info
+            );
             const resultDiv = document.getElementById('resultContainer');
             resultDiv.innerHTML = html;
             resultDiv.style.display = 'block';
+            
+            // Update rate limit info
+            await checkRateLimit();
         } catch (err) {
+            console.error('Scan error:', err);
             stopLoadingAndSetComplete();
             await new Promise(r => setTimeout(r, 400));
             document.getElementById('resultContainer').innerHTML = `
                 <div class="error-message">
                     ❌ error ❌<br><br>
-                    🔍 ${err.message}<br>
+                    🔍 ${err.message || 'Unknown error occurred'}<br>
                     💡 please check the uid and try again.
                 </div>`;
             document.getElementById('resultContainer').style.display = 'block';
@@ -586,6 +744,9 @@
             document.getElementById('loadingArea').style.display = 'none';
         }
     });
+
+    // Check rate limit on page load
+    checkRateLimit();
 </script>
 </body>
 </html>
