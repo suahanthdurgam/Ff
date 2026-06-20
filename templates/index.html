@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>⚡ DRIFT SCAN • DG DRIFT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 20%, #0a0c1a, #010105);
+            font-family: 'Orbitron', 'Share Tech Mono', monospace;
+            font-variant: small-caps;
+            color: #e0f0ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            letter-spacing: 1px;
+        }
+
+        /* animated grid background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(#0ff1 1px, transparent 1px),
+                linear-gradient(90deg, #0ff1 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridPulse 8s infinite linear;
+        }
+
+        @keyframes gridPulse {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.2; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* glass card with neon border */
+        .cyber-card {
+            background: rgba(6, 12, 24, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 32px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.05);
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 2.6rem;
+            background: linear-gradient(135deg, #ff66ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px #0ff5;
+            letter-spacing: 3px;
+            font-variant: small-caps;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 8px cyan;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0 25px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cyber-input {
+            flex: 2;
+            min-width: 240px;
+            background: #010a14dd;
+            border: 1.5px solid #0cf;
+            border-radius: 60px;
+            padding: 14px 26px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0ff;
+            outline: none;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+            letter-spacing: 1px;
+            font-variant: small-caps;
+        }
+
+        .cyber-input:focus {
+            border-color: #ff44ee;
+            box-shadow: 0 0 20px #ff44ee, inset 0 0 6px #ff44ee;
+        }
+
+        .cyber-btn {
+            background: linear-gradient(115deg, #0a1f2e, #001a30);
+            border: 1px solid #0ff;
+            padding: 12px 36px;
+            border-radius: 60px;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #0ff;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 12px #0ff4;
+            font-variant: small-caps;
+        }
+
+        .cyber-btn:hover {
+            background: #0ff2;
+            border-color: #ff44ee;
+            color: #fff;
+            box-shadow: 0 0 28px #ff44ee;
+            transform: scale(1.03);
+        }
+
+        /* loading zone - neon progress */
+        .loading-zone {
+            background: #07121fcc;
+            border-radius: 32px;
+            padding: 1.5rem;
+            margin: 30px 0;
+            border-left: 8px solid #0ff;
+            border-right: 2px solid #f0f;
+            backdrop-filter: blur(8px);
+        }
+
+        .progress-stage {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-variant: small-caps;
+            font-weight: bold;
+        }
+
+        .progress-bar-bg {
+            background: #11212e;
+            border-radius: 40px;
+            height: 16px;
+            margin: 16px 0;
+            overflow: hidden;
+            box-shadow: inset 0 0 8px #000;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #0cf, #f0f);
+            border-radius: 40px;
+            transition: width 0.25s ease;
+            box-shadow: 0 0 10px cyan;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeGlow 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes fadeGlow {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(3px);}
+            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
+        }
+
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .data-block {
+            background: rgba(3, 11, 23, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 28px;
+            padding: 1.4rem;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .data-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 22px cyan;
+            border-color: cyan;
+        }
+
+        .block-title {
+            font-weight: 800;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #0ff;
+            display: inline-block;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            background: linear-gradient(145deg, #aaffff, #0cf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            font-variant: small-caps;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dashed #2c6e8f;
+            padding: 10px 0;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.88rem;
+            font-variant: small-caps;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #9bdff5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            color: #ffe6b3;
+            word-break: break-word;
+            text-align: right;
+            max-width: 60%;
+            font-weight: 500;
+            font-variant: small-caps;
+        }
+
+        code {
+            background: #000000aa;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #0ff;
+            font-family: monospace;
+        }
+
+        .media-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            justify-content: center;
+            margin: 30px 0 40px;
+        }
+
+        .media-card {
+            background: #07121fe0;
+            border-radius: 32px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid #ff44ee;
+            box-shadow: 0 0 18px #ff44ee40;
+            max-width: 340px;
+            transition: 0.2s;
+        }
+
+        .media-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 28px #ff44ee;
+        }
+
+        .media-card img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 0 18px cyan;
+        }
+
+        .error-message {
+            background: #2a0a1fdd;
+            border-left: 8px solid #ff3366;
+            padding: 24px;
+            border-radius: 28px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
+        }
+
+        /* developer links - stylish */
+        .dev-links {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #0ff;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .dev-links a {
+            color: #0ff;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 255, 0.08);
+            padding: 8px 20px;
+            border-radius: 48px;
+            border: 1px solid #0ff;
+            font-variant: small-caps;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
+        }
+
+        .dev-links a:hover {
+            background: #0ff3;
+            color: white;
+            box-shadow: 0 0 18px cyan;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            font-variant: small-caps;
+        }
+
+        @media (max-width: 760px) {
+            body { padding: 1rem; }
+            .info-value { max-width: 55%; font-size: 0.7rem; }
+            .block-title { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="cyber-card" style="text-align: center;">
+        <h1>◢ DRIFT SCAN · DG DRIFT ◣</h1>
+        <p style="margin-top: 8px; letter-spacing: 2px; font-variant: small-caps;">⚡ ULTRA VISUAL PLAYER ANALYZER ⚡</p>
+        <div class="input-group">
+            <input type="text" id="uidInput" class="cyber-input" placeholder="➤ enter uid ..." autocomplete="off">
+            <button id="scanBtn" class="cyber-btn">⟁ scan player</button>
+        </div>
+    </div>
+
+    <div id="loadingArea" style="display: none;">
+        <div class="loading-zone">
+            <div class="progress-stage" id="stageMessage">🔄 connecting...</div>
+            <div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div>
+            <div id="stageDetail" style="font-size: 0.75rem; color: #0cf9; font-variant: small-caps;">[▓░░░░░░░░░] 10%</div>
+        </div>
+    </div>
+
+    <div id="resultContainer" class="result-container"></div>
+
+    <!-- fixed footer links -->
+    <div class="dev-links">
+        <span>⚡ developer:</span>
+        <a href="https://t.me/DGDRIFT" target="_blank">𝐃𝐑𝐈𝐅𝐓 🕷️</a>
+        <a href="https://t.me/DGDRIFT" target="_blank">📱 tg: @dgdrift</a>
+        <a href="https://t.me/DGDRIFT" target="_blank">📢 channel: @dgdrift</a>
+    </div>
+    <footer>⚡ dg drift • next‑gen cyber scan ⚡</footer>
+</div>
+
+<script>
+    // ---------- loading steps (same original animation, small caps text) ----------
+    let stepInterval = null;
+    let currentStep = 0;
+    const steps = [
+        { msg: "🔄 establishing secure link...", sub: "[▓░░░░░░░░░] 10%", percent: 10 },
+        { msg: "🔍 scanning account data...", sub: "[▓▓▓░░░░░░░] 30%", percent: 30 },
+        { msg: "🔗 api connecting...", sub: "[▓▓▓▓▓░░░░░] 50%", percent: 50 },
+        { msg: "⚙️ executing request...", sub: "[▓▓▓▓▓▓▓░░░] 70%", percent: 70 },
+        { msg: "🚀 fetching info... please wait", sub: "[▓▓▓▓▓▓▓▓▓░] 90%", percent: 90 }
+    ];
+
+    function startLoadingAnimation() {
+        currentStep = 0;
+        if (stepInterval) clearInterval(stepInterval);
+        const stageMsgDiv = document.getElementById('stageMessage');
+        const stageDetailDiv = document.getElementById('stageDetail');
+        const progressFill = document.getElementById('progressFill');
+        function updateStep(stepIdx) {
+            if (stepIdx < steps.length) {
+                stageMsgDiv.innerText = steps[stepIdx].msg;
+                stageDetailDiv.innerText = steps[stepIdx].sub;
+                progressFill.style.width = steps[stepIdx].percent + '%';
+            }
+        }
+        updateStep(0);
+        stepInterval = setInterval(() => {
+            if (currentStep + 1 < steps.length) {
+                currentStep++;
+                updateStep(currentStep);
+            }
+        }, 800);
+    }
+
+    function stopLoadingAndSetComplete() {
+        if (stepInterval) clearInterval(stepInterval);
+        stepInterval = null;
+        const stageMsgDiv = document.getElementById('stageMessage');
+        const stageDetailDiv = document.getElementById('stageDetail');
+        const progressFill = document.getElementById('progressFill');
+        if (stageMsgDiv) stageMsgDiv.innerText = "✅ success! uid scanned";
+        if (stageDetailDiv) stageDetailDiv.innerText = "[▓▓▓▓▓▓▓▓▓▓] 100%";
+        if (progressFill) progressFill.style.width = "100%";
+    }
+
+    function resetUI() {
+        document.getElementById('resultContainer').style.display = 'none';
+        document.getElementById('resultContainer').innerHTML = '';
+        document.getElementById('loadingArea').style.display = 'none';
+        if (stepInterval) clearInterval(stepInterval);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return 'None';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function ts(value) {
+        if (!value) return "None";
+        try {
+            let tsNum = parseInt(value);
+            if (isNaN(tsNum)) return value;
+            return new Date(tsNum * 1000).toLocaleString();
+        } catch(e) { return value; }
+    }
+
+    function renderPlayerData(data, bannerBase64, outfitBase64) {
+        const p = data.basicInfo || {};
+        const pr = data.profileInfo || {};
+        const g = data.clanBasicInfo || {};
+        const go = data.captainBasicInfo || {};
+        const s = data.socialInfo || {};
+        const c = data.creditScoreInfo || {};
+        const d = data.diamondCostRes || {};
+        const pet = data.petInfo || {};
+
+        const weaponSkins = Array.isArray(p.weaponSkinShows) ? p.weaponSkinShows.join(", ") : "None";
+        const skillsTxt = Array.isArray(pr.equipedSkills) ? pr.equipedSkills.join(", ") : "None";
+        const clothesTxt = Array.isArray(pr.clothes) ? pr.clothes.join(", ") : "None";
+        const captainWeapons = Array.isArray(go.weaponSkinShows) ? go.weaponSkinShows.join(", ") : "N/A";
+        const primeLevel = p.primeInfo?.primeLevel ?? 0;
+        const captainPrime = go.primeInfo?.primeLevel ?? 0;
+
+        const bannerImg = bannerBase64 ? `data:image/png;base64,${bannerBase64}` : null;
+        const outfitImg = outfitBase64 ? `data:image/png;base64,${outfitBase64}` : null;
+
+        return `
+            <div class="media-row">
+                ${bannerImg ? `<div class="media-card"><div class="block-title">⚡ banner sticker</div><img src="${bannerImg}" alt="Banner"></div>` : ''}
+                ${outfitImg ? `<div class="media-card"><div class="block-title">🎭 outfit visual</div><img src="${outfitImg}" alt="Outfit"></div>` : ''}
+            </div>
+            <div class="info-section">
+                <div class="data-block"><div class="block-title">🧬 basic identity</div>
+                    <div class="info-row"><span class="info-label">name</span><span class="info-value"><code>${escapeHtml(p.nickname)}</code></span></div>
+                    <div class="info-row"><span class="info-label">uid</span><span class="info-value"><code>${escapeHtml(p.accountId)}</code></span></div>
+                    <div class="info-row"><span class="info-label">prime lv</span><span class="info-value"><code>${primeLevel}</code></span></div>
+                    <div class="info-row"><span class="info-label">type</span><span class="info-value"><code>${escapeHtml(p.accountType)}</code></span></div>
+                    <div class="info-row"><span class="info-label">level</span><span class="info-value"><code>${p.level ?? '?'} (exp: ${p.exp ?? 0})</code></span></div>
+                    <div class="info-row"><span class="info-label">region</span><span class="info-value"><code>${escapeHtml(p.region)}</code></span></div>
+                    <div class="info-row"><span class="info-label">likes</span><span class="info-value"><code>${p.liked ?? 0}</code></span></div>
+                    <div class="info-row"><span class="info-label">elite pass</span><span class="info-value"><code>${p.hasElitePass ?? false}</code></span></div>
+                    <div class="info-row"><span class="info-label">badge id</span><span class="info-value"><code>${p.badgeId ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">season id</span><span class="info-value"><code>${p.seasonId ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">title</span><span class="info-value"><code>${p.title || 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">banner id</span><span class="info-value"><code>${p.bannerId ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">headpic</span><span class="info-value"><code>${p.headPic ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">last login</span><span class="info-value"><code>${ts(p.lastLoginAt)}</code></span></div>
+                    <div class="info-row"><span class="info-label">created</span><span class="info-value"><code>${ts(p.createAt)}</code></span></div>
+                </div>
+                <div class="data-block"><div class="block-title">📊 rank & activity</div>
+                    <div class="info-row"><span class="info-label">br rank</span><span class="info-value"><code>${p.rank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">br points</span><span class="info-value"><code>${p.rankingPoints ?? 0}</code></span></div>
+                    <div class="info-row"><span class="info-label">cs rank</span><span class="info-value"><code>${p.csRank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">cs points</span><span class="info-value"><code>${p.csRankingPoints ?? 0}</code></span></div>
+                    <div class="info-row"><span class="info-label">max br</span><span class="info-value"><code>${p.maxRank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">max cs</span><span class="info-value"><code>${p.csMaxRank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">mode prefer</span><span class="info-value"><code>${s.modePrefer ?? 'None'}</code></span></div>
+                </div>
+                <div class="data-block"><div class="block-title">⚔️ equip & skills</div>
+                    <div class="info-row"><span class="info-label">weapon skins</span><span class="info-value"><code>${escapeHtml(weaponSkins)}</code></span></div>
+                    <div class="info-row"><span class="info-label">skills</span><span class="info-value"><code>${escapeHtml(skillsTxt)}</code></span></div>
+                    <div class="info-row"><span class="info-label">clothes</span><span class="info-value"><code>${escapeHtml(clothesTxt)}</code></span></div>
+                    <div class="info-row"><span class="info-label">awaken</span><span class="info-value"><code>${pr.isSelectedAwaken ?? false}</code></span></div>
+                    <div class="info-row"><span class="info-label">unlock time</span><span class="info-value"><code>${ts(pr.unlockTime)}</code></span></div>
+                </div>
+                <div class="data-block"><div class="block-title">🛡️ guild syndicate</div>
+                    <div class="info-row"><span class="info-label">clan name</span><span class="info-value"><code>${escapeHtml(g.clanName)}</code></span></div>
+                    <div class="info-row"><span class="info-label">clan id</span><span class="info-value"><code>${g.clanId ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">level</span><span class="info-value"><code>${g.clanLevel ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">members</span><span class="info-value"><code>${g.memberNum ?? 0}/${g.capacity ?? 0}</code></span></div>
+                    <div class="block-title" style="font-size:0.9rem; margin-top:12px;">👑 leader</div>
+                    <div class="info-row"><span class="info-label">name</span><span class="info-value"><code>${escapeHtml(go.nickname)}</code></span></div>
+                    <div class="info-row"><span class="info-label">uid</span><span class="info-value"><code>${go.accountId || 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">prime lv</span><span class="info-value"><code>${captainPrime}</code></span></div>
+                    <div class="info-row"><span class="info-label">br rank</span><span class="info-value"><code>${go.rank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">cs rank</span><span class="info-value"><code>${go.csRank ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">weapons</span><span class="info-value"><code>${escapeHtml(captainWeapons)}</code></span></div>
+                </div>
+                <div class="data-block"><div class="block-title">🐾 pet core</div>
+                    <div class="info-row"><span class="info-label">name</span><span class="info-value"><code>${escapeHtml(pet.name)}</code></span></div>
+                    <div class="info-row"><span class="info-label">id</span><span class="info-value"><code>${pet.id ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">level</span><span class="info-value"><code>${pet.level ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">exp</span><span class="info-value"><code>${pet.exp ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">skill id</span><span class="info-value"><code>${pet.selectedSkillId ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">selected</span><span class="info-value"><code>${pet.isSelected ?? false}</code></span></div>
+                    <div class="info-row"><span class="info-label">marked star</span><span class="info-value"><code>${pet.isMarkedStar ?? false}</code></span></div>
+                </div>
+                <div class="data-block"><div class="block-title">🌐 social & credit</div>
+                    <div class="info-row"><span class="info-label">gender</span><span class="info-value"><code>${s.gender ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">language</span><span class="info-value"><code>${s.language ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">bio</span><span class="info-value"><code>${escapeHtml(s.signature)}</code></span></div>
+                    <div class="info-row"><span class="info-label">honor score</span><span class="info-value"><code>${c.creditScore ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">reward state</span><span class="info-value"><code>${c.rewardState ?? 'None'}</code></span></div>
+                    <div class="info-row"><span class="info-label">summary end</span><span class="info-value"><code>${ts(c.periodicSummaryEndTime)}</code></span></div>
+                    <div class="info-row"><span class="info-label">💎 diamond cost</span><span class="info-value"><code>${d.diamondCost ?? 'None'}</code></span></div>
+                </div>
+            </div>
+            <div class="dev-links" style="margin-top: 2rem;">
+                <span>⚡ developer:</span>
+                <a href="https://t.me/DGDRIFT" target="_blank">𝐃𝐑𝐈𝐅𝐓 🕷️</a>
+                <a href="https://t.me/DGDRIFT" target="_blank">📱 tg: @dgdrift</a>
+                <a href="https://t.me/DGDRIFT" target="_blank">📢 channel: @dgdrift</a>
+            </div>
+        `;
+    }
+
+    document.getElementById('scanBtn').addEventListener('click', async () => {
+        const uid = document.getElementById('uidInput').value.trim();
+        if (!uid) return alert("⚠️ enter valid uid");
+
+        resetUI();
+        document.getElementById('loadingArea').style.display = 'block';
+        startLoadingAnimation();
+
+        try {
+            const response = await fetch(`/api/player?uid=${encodeURIComponent(uid)}`);
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || "player not found");
+            }
+            const data = await response.json();
+            stopLoadingAndSetComplete();
+            await new Promise(r => setTimeout(r, 400));
+
+            const html = renderPlayerData(data.info, data.banner_base64, data.outfit_base64);
+            const resultDiv = document.getElementById('resultContainer');
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = 'block';
+        } catch (err) {
+            stopLoadingAndSetComplete();
+            await new Promise(r => setTimeout(r, 400));
+            document.getElementById('resultContainer').innerHTML = `
+                <div class="error-message">
+                    ❌ error ❌<br><br>
+                    🔍 ${err.message}<br>
+                    💡 please check the uid and try again.
+                </div>`;
+            document.getElementById('resultContainer').style.display = 'block';
+        } finally {
+            document.getElementById('loadingArea').style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
