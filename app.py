@@ -5,6 +5,7 @@ import concurrent.futures
 import asyncio
 import logging
 import base64
+import os
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -89,12 +90,16 @@ def get_player():
     banner_b64 = base64.b64encode(banner_bytes).decode('utf-8') if banner_bytes else None
     outfit_b64 = base64.b64encode(outfit_bytes).decode('utf-8') if outfit_bytes else None
 
-    return jsonify({
+    # Clean up the response data - ensure it's properly structured
+    response_data = {
         'info': player_data,
         'banner_base64': banner_b64,
         'outfit_base64': outfit_b64
-    })
+    }
+    
+    return jsonify(response_data)
 
 if __name__ == '__main__':
-    # 🔥 FIX: disable debug mode and reloader to avoid multiprocessing issues on Termux
+    # Create templates folder if it doesn't exist
+    os.makedirs('templates', exist_ok=True)
     app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
